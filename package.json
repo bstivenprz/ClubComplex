@@ -1,0 +1,51 @@
+{
+  "name": "clubcomplex",
+  "version": "1.0.0",
+  "description": "Plataforma para comprar títulos inmobiliarios.",
+  "main": "index.js",
+  "scripts": {
+    "server": "cd api && nodemon server.js",
+    "start": "cd web && webpack-dev-server --open",
+    "debug": "cd api && nodemon --inspect server.js",
+    "build": "cd web && webpack"
+  },
+  "events": {
+    "server": "echo \"\\x1Bc\""
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bstivenprz/ClubComplex.git"
+  },
+  "author": "Brandon Stiven Pérez B.",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bstivenprz/ClubComplex/issues"
+  },
+  "homepage": "https://github.com/bstivenprz/ClubComplex#readme",
+  "dependencies": {
+    "@material-ui/core": "^4.9.7",
+    "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.46",
+    "axios": "^0.19.2",
+    "body-parser": "^1.19.0",
+    "express": "^4.17.1",
+    "glob": "^7.1.6",
+    "helmet": "^3.22.0",
+    "moment": "^2.24.0",
+    "mongoose": "^5.9.6",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.9.0",
+    "@babel/preset-env": "^7.9.0",
+    "@babel/preset-react": "^7.9.4",
+    "babel-loader": "^8.1.0",
+    "dotenv": "^8.2.0",
+    "html-webpack-plugin": "^4.0.1",
+    "nodemon": "^2.0.2",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-dev-server": "^3.10.3"
+  }
+}
