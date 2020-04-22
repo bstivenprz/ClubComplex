@@ -1,12 +1,25 @@
-import React from 'react'
+import React from 'react';
+import LogIn from './views/LogIn';
+import Home from './views/Home';
+import Dashboard from './views/Dashboard';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 function App() {
   return (
-    <div>
-      <h1>Welcome to my new app!</h1>
-      <p>This is a template for create new web apps.</p>
-    </div>
+    <Router>
+      <Switch>
+        <Route exac path="/">
+          <Home />
+        </Route>
+        <Route path="/login">
+          <LogIn />
+        </Route>
+        <Route path="/dashboard">
+          <Dashboard />
+        </Route>
+      </Switch>
+    </Router>
   )
 }
 
-export default App()
+export default App();
