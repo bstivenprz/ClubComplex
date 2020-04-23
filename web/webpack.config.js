@@ -10,11 +10,13 @@ module.exports = {
   devServer: {
     hot: true,
     host: process.env.HOST || 'localhost',
-    port: process.env.WEB_PORT || 8080
+    port: process.env.WEB_PORT || 8080,
+    historyApiFallback: true
   },
   output: {
     path: path.resolve(__dirname, 'production'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    publicPath: '/'
   },
   module: {
     rules: [
@@ -25,6 +27,10 @@ module.exports = {
         options: {
           presets: ["@babel/preset-env", "@babel/preset-react"]
         }
+      },
+      {
+        test: /\.(png|svg|jpg|git)$/,
+        use: [ 'file-loader' ],
       }
     ]
   },
