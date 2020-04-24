@@ -14,7 +14,7 @@ import { Link as RouterLink } from 'react-router-dom';
 
 import BackgroundImage from '../../resources/images/clubcomplex-login-background.jpg';
 import Logo from '../../resources/images/clubcomplex-blue-logo.png';
-import SecondaryCopyright from '../../components/secondary-copyright';
+import Footer from '../../components/secondary-footer';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
   },
   logo: {
     margin: theme.spacing(1, 1, 4, 1),
-    height: '76px'
+    height: '50px'
   },
   form: {
     width: '100%', // Fix IE 11 issue.
@@ -133,7 +133,7 @@ export default function SignInSide() {
             </Grid>
           </Grid>
         </div>
-        <SecondaryCopyright />
+        <Footer />
       </Grid>
     </Grid>
   );
