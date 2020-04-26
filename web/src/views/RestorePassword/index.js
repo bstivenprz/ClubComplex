@@ -13,6 +13,9 @@ import Container from '@material-ui/core/Container';
 import Footer from '../../components/secondary-footer';
 
 const useStyles = makeStyles((theme) => ({
+  root: {
+    height: '100vh'
+  },
   paper: {
     marginTop: theme.spacing(8),
     display: 'flex',
@@ -36,51 +39,55 @@ export default function SignIn() {
   const classes = useStyles();
 
   return (
-    <>
-      <Container component="main" maxWidth="xs">
+    <div>
         <CssBaseline />
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Restaurar cuenta
-          </Typography>
-          <Typography component="p" variant="body1" align="center">
-            Ingresa tu correo electrónico para recuperar tu cuenta.
-          </Typography>
-          <form className={classes.form} noValidate>
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Correo electrónico"
-              name="email"
-              autoComplete="email"
-              autoFocus
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-            >
-              Recuperar cuenta
-            </Button>
-            <Grid container>
-              <Grid item>
-                <Link variant="body2" component={RouterLink} to="/">
-                  {"¿No tienes una cuenta? Regístrate Gratis."}
-                </Link>
-              </Grid>
-            </Grid>
-          </form>
-        </div>
-      </Container>
-      <Footer />
-    </>
+        <Grid container direction="column" component="main" className={classes.root}>
+          <Grid item xs>
+            <Container maxWidth="xs">
+              <div className={classes.paper}>
+                <Avatar className={classes.avatar}>
+                  <LockOutlinedIcon />
+                </Avatar>
+                <Typography component="h1" variant="h5">
+                  Restaurar cuenta
+                </Typography>
+                <Typography component="p" variant="body1" align="center">
+                  Ingresa tu correo electrónico para recuperar tu cuenta.
+                </Typography>
+                <form className={classes.form} noValidate>
+                  <TextField
+                    variant="outlined"
+                    margin="normal"
+                    required
+                    fullWidth
+                    id="email"
+                    label="Correo electrónico"
+                    name="email"
+                    autoComplete="email"
+                    autoFocus
+                  />
+                  <Button
+                    type="submit"
+                    fullWidth
+                    variant="contained"
+                    color="primary"
+                    className={classes.submit}
+                  >
+                    Recuperar cuenta
+                  </Button>
+                  <Grid container>
+                    <Grid item>
+                      <Link variant="body2" component={RouterLink} to="/">
+                        {"¿No tienes una cuenta? Regístrate Gratis."}
+                      </Link>
+                    </Grid>
+                  </Grid>
+                </form>
+              </div>
+            </Container>
+          </Grid>
+          <Footer />
+        </Grid>
+    </div>
   );
 }
