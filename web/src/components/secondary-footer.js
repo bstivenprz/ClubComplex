@@ -18,6 +18,9 @@ const useStyles = makeStyles((theme) => ({
   }
 }));
 
+// TODO: No permitir que el footer sea fixed porque se vuelve sticky al scroll.
+// TODO: Agregar el componente Container para los espacios laterales de la sección.
+
 export default function () {
   const classes = useStyles();
 

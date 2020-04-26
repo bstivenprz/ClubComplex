@@ -3,6 +3,8 @@ import { createMuiTheme } from '@material-ui/core/styles';
 export default createMuiTheme({
   palette: {
     background: {
+      default: '#fff',
+      secondary: '#01104B',
       footer: {
         primary: '#01104B',
         secondary: '#F2F2F6'

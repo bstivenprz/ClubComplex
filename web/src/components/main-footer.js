@@ -6,12 +6,11 @@ import Hidden from '@material-ui/core/Hidden';
 import Grid from '@material-ui/core/Grid';
 import { makeStyles } from '@material-ui/core/styles';
 
-import Logo from '../resources/images/clubcomplex-blue-logo.png';
+import Logo from '../resources/images/clubcomplex-white-logo.png';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    position: 'fixed',
-    bottom: 0,
+    height: '180px',
     backgroundColor: theme.palette.background.footer.primary,
     padding: theme.spacing(4)
   },
