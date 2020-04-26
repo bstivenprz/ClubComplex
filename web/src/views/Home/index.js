@@ -148,21 +148,44 @@ function LandingPageForm() {
 }
 
 function LandingPage() {
+  const componentStyle = makeStyles((theme) => ({
+    landingPage: {
+      height: '100%',
+      backgroundImage: `url(${BackgroundImage})`,
+      backgroundRepeat: 'no-repeat',
+      backgroundColor: theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+    },
+    content: {
+      marginBottom: theme.spacing(18)
+    },
+    form: {
+      position: 'relative',
+      top: '-80px',
+      height: 220,
+      margin: theme.spacing(2),
+      padding: theme.spacing(2)
+    }
+  }));
+  const classes = componentStyle();
   return (
     <React.Fragment>
-      <Container fixed>
-        <Menu />
-        <Grid container direction="row" spacing={4} alignItems="center">
-          <Grid item xs={12} sm={12} md={6} lg={6}>
-            <LandingPageInfo />
+      <Grid container component="main" className={classes.landingPage}>
+        <Container fixed>
+          <Menu />
+          <Grid container direction="row" spacing={4} alignItems="center" className={classes.content}>
+            <Grid item xs={12} sm={12} md={6} lg={6}>
+              <LandingPageInfo />
+            </Grid>
+            <Grid item xs={12} sm={12} md={6} lg={6}>
+              <Box display="flex" justifyContent="flex-end">
+                <LandingPageForm />
+              </Box>
+            </Grid>
           </Grid>
-          <Grid item xs={12} sm={12} md={6} lg={6}>
-            <Box display="flex" justifyContent="flex-end">
-              <LandingPageForm />
-            </Box>
-          </Grid>
-        </Grid>
-      </Container>
+        </Container>
+      </Grid>
     </React.Fragment>
   );
 }
@@ -188,7 +211,6 @@ function FeaturesBox({ data }) {
     }
   }));
   const classes = componentStyle();
-  // TODO: Agregar la imagen de fondo de la tarjeta.
   return (
     <Grid container>
       {data.map(({ title, content }, key) => {
@@ -254,8 +276,7 @@ function Features() {
   );
 }
 
-function HowItWorksCard(props) {
-  const { number, title, content } = props;
+function HowItWorksCard({ data }) {
   const componentStyle = makeStyles((theme) => ({
     paper: {
       margin: theme.spacing(2),
@@ -266,9 +287,10 @@ function HowItWorksCard(props) {
       color: '#CCCFDB',
       position: 'relative',
       bottom: '-80px',
-      left: '32px'
+      paddingLeft: 32
     },
     title: {
+      textTransform: 'uppercase',
       marginBottom: theme.spacing(1)
     },
     sideLine: {
@@ -278,79 +300,76 @@ function HowItWorksCard(props) {
     }
   }));
   const classes = componentStyle();
-  return (
-    <>
-      <Typography variant="h1" component="h1" className={classes.hugeNumber}>
-        <Box fontWeight="fontWeightBold">
-          {number}
-        </Box>
-      </Typography>
-      <Paper elevation={2} className={classes.paper}>
-        <Box display="flex" flexDirection="row">
-          <div className={classes.sideLine}></div>
-          <Typography variant="h6" component="h6" className={classes.title}>{title}</Typography>
-        </Box>
-        <Typography variant="body1">{content}</Typography>
-      </Paper>
-    </>
-  );
+  return data.map(({ number, title, content }, key) => {
+    return (
+      <Grid item xs={12} sm={12} md={4} lg={4} key={key}>
+        <Typography variant="h1" component="h1" className={classes.hugeNumber}>
+          <Box fontWeight="fontWeightBold">
+            {number}
+          </Box>
+        </Typography>
+        <Paper elevation={2} className={classes.paper}>
+          <Box display="flex" flexDirection="row">
+            <div className={classes.sideLine}></div>
+            <Typography variant="h6" component="h6" className={classes.title}>{title}</Typography>
+          </Box>
+          <Typography variant="body1">{content}</Typography>
+        </Paper>
+      </Grid>
+    );
+  });
 }
 
 function HowItWorks() {
-  // TODO: Agregar el componente Container para los espacios laterales de la sección.
-  // Agregarlo igualmente para las demás secciones.
   const componentStyle = makeStyles((theme) => ({
     root: {
-      padding: theme.spacing(8, 4)
-    },
-    content: {
-      margin: theme.spacing(4, 0)
+      backgroundColor: '#FFF',
+      padding: theme.spacing(12, 0)
     }
   }));
   const classes = componentStyle();
+  const boxes = [
+    {
+      number: 1,
+      title: 'Únete',
+      content: `
+        Regístrate de forma gratuita con tu nombre,
+        correo electrónico, teléfono, ciudad y si
+        alguien te ha referido con nosotros ingresa
+        su código promocional.
+      `
+    },
+    {
+      number: 2,
+      title: 'Explora',
+      content: `
+        Revisa nuestra oferta de proyectos
+        inmobiliarios y decide en cuál te gustaría
+        participar.
+      `
+    },
+    {
+      number: 3,
+      title: 'Invierte',
+      content: `
+        Una vez seleccionado un proyecto haz clic
+        y espera que nuestro equipo te contacte.
+      `
+    }
+  ];
   return (
     <React.Fragment>
       <div className={classes.root}>
-        <Typography variant="h5" component="h5">
-          <Box fontWeight="fontWeightBold">
-            ¿CÓMO FUNCIONA?
-          </Box>
-        </Typography>
-        <Grid container className={classes.content}>
-          <Grid item xs={12} sm={12} md={4} lg={4}>
-            <HowItWorksCard
-              number={1}
-              title="ÚNETE"
-              content="
-                Regístrate de forma gratuita con tu nombre,
-                correo electrónico, teléfono, ciudad y si
-                alguien te ha referido con nosotros ingresa
-                su código promocional.
-              "
-            />
+        <Container fixed>
+          <Typography variant="h5" component="h5">
+            <Box fontWeight="fontWeightBold">
+              ¿CÓMO FUNCIONA?
+            </Box>
+          </Typography>
+          <Grid container>
+            <HowItWorksCard data={boxes} />
           </Grid>
-          <Grid item xs={12} sm={12} md={4} lg={4}>
-            <HowItWorksCard
-              number={2}
-              title="EXPLORA"
-              content="
-                Revisa nuestra oferta de proyectos
-                inmobiliarios y decide en cuál te gustaría
-                participar.
-              "
-            />
-          </Grid>
-          <Grid item xs={12} sm={12} md={4} lg={4}>
-            <HowItWorksCard
-              number={3}
-              title="INVIERTE"
-              content="
-                Una vez seleccionado un proyecto haz clic
-                y espera que nuestro equipo te contacte.
-              "
-            />
-          </Grid>
-        </Grid>
+        </Container>
       </div>
     </React.Fragment>
   );
@@ -359,63 +378,44 @@ function HowItWorks() {
 function Insights() {
   const componentStyle = makeStyles((theme) => ({
     root: {
-      backgroundColor: '#FAFAFA',
-      padding: theme.spacing(8, 4)
+      backgroundColor: '#FAFAFA'
     },
     content: {
-      margin: theme.spacing(4, 0)
+      padding: theme.spacing(12, 0)
     },
     contentImage: {
       height: '230px',
       display: 'block',
-      marginLeft: 'auto',
-      marginRight: 'auto'
+      margin: '12px auto'
     }
   }));
   const classes = componentStyle();
   return (
     <React.Fragment>
       <div className={classes.root}>
-        <Grid container className={classes.content} spacing={2} >
-          <Grid item xs={12} sm={12} md={4} lg={4}>
-            <Box justifyContent="center">
-            <img src={InsightsOne} className={classes.contentImage} />
-            </Box>
+        <Container fixed>
+          <Grid container direction="row" pacing={2} className={classes.content}>
+            <Grid item xs={12} sm={12} md={4} lg={4}>
+              <img src={InsightsOne} className={classes.contentImage} />
+            </Grid>
+            <Grid item xs={12} sm={12} md={4} lg={4}>
+              <img src={InsightsTwo} className={classes.contentImage} />
+            </Grid>
+            <Grid item xs={12} sm={12} md={4} lg={4}>
+              <img src={InsightsThree} className={classes.contentImage} />
+            </Grid>
           </Grid>
-          <Grid item xs={12} sm={12} md={4} lg={4}>
-            <img src={InsightsTwo} className={classes.contentImage} />
-          </Grid>
-          <Grid item xs={12} sm={12} md={4} lg={4}>
-            <img src={InsightsThree} className={classes.contentImage} />
-          </Grid>
-        </Grid>
+        </Container>
       </div>
     </React.Fragment>
   );
 }
 
 export default function Home() {
-  const useStyles = makeStyles((theme) => ({
-    root: {
-      padding: '0px 90px'
-    },
-    landingPage: {
-      height: '1280px',
-      backgroundImage: `url(${BackgroundImage})`,
-      backgroundRepeat: 'no-repeat',
-      backgroundColor: theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
-      backgroundSize: 'cover',
-      backgroundPosition: 'center',
-    }
-  }));
-  const classes = useStyles();
-  // TODO: Agregar el botón de scroll en la landing page. Con una animación.
   return (
     <div>
       <CssBaseline />
-      <Grid container component="main" className={classes.landingPage}>
-        <LandingPage />
-      </Grid>
+      <LandingPage />
       <Features />
       <HowItWorks />
       <Insights />
