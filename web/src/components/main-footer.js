@@ -70,25 +70,25 @@ function DesktopFooter(props) {
       </Grid>
       <Grid item>
         <Typography variant="body2" align="center" className={classes.text}>
-          <Box fontWeight="fontWeightBold" display="inline">
+          <strong>
             <Link color="inherit" href={urlSite}>
               Club Complex
             </Link>
             {' '}
             {new Date().getFullYear()}
             {' © '}
-          </Box>
+          </strong>
           { copyright }
         </Typography>
       </Grid>
       <Grid item>
         <Typography variant="body2" align="center" className={classes.text}>
           {'Sitio web creado por '}
-          <Box fontWeight="fontWeightBold" display="inline">
+          <strong>
             <Link color="inherit" href={urlDeveloper}>
               { developer }
             </Link>
-          </Box>
+          </strong>
         </Typography>
       </Grid>
     </Grid>

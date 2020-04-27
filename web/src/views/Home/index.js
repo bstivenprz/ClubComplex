@@ -155,7 +155,7 @@ function LandingPage() {
       backgroundRepeat: 'no-repeat',
       backgroundColor: theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
       backgroundSize: 'cover',
-      backgroundPosition: 'center',
+      backgroundPosition: 'center'
     },
     content: {
       marginBottom: theme.spacing(18)
