@@ -153,8 +153,14 @@ function ProyectList() {
 }
 
 function ProyectViewer() {
+  const componentStyle = makeStyles((theme) => ({
+    paper: {
+      padding: theme.spacing(2)
+    }
+  }));
+  const classes = componentStyle();
   return (
-    <Paper>
+    <Paper className={classes.paper}>
       <h1>Profile</h1>
     </Paper>
   );
