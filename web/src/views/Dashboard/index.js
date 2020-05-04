@@ -7,7 +7,6 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-<<<<<<< HEAD
 import Link from '@material-ui/core/Link';
 import { Link as RouterLink } from 'react-router-dom';
 import { Typography, Box } from '@material-ui/core';
@@ -19,13 +18,11 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import StarBorder from '@material-ui/icons/StarBorder';
 import Collapse from '@material-ui/core/Collapse';
 
-=======
 import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import Avatar from '@material-ui/core/Avatar';
 import Divider from '@material-ui/core/Divider';
->>>>>>> Authentication
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
@@ -58,13 +55,10 @@ import { API_PROJECTS_LIST, API_PROJECTS } from '../../helpers/apiUrls.helper';
 
 import ContextClient from '../../helpers/ContextClient';
 
-<<<<<<< HEAD
 import ProyectImage from '../../resources/images/clubcomplex-proyect-image-1.jpeg';
 
 function Profile() {
-=======
 function HeroHeader() {
->>>>>>> Authentication
   const componentStyle = makeStyles((theme) => ({
     hero: {
       height: '100%',
@@ -263,7 +257,6 @@ function ProyectReview(props) {
   }));
   const classes = componentStyle();
 
-<<<<<<< HEAD
 function TechnicsSpecificationList({ items }) {
   const componentStyle = makeStyles((theme) => ({
     itemText: {
@@ -355,7 +348,6 @@ function ProyectViewer() {
     </Paper>
   );
 }
-=======
   const [open, setOpen] = React.useState({
     checkout: false,
     payment: false
@@ -372,10 +364,8 @@ function ProyectViewer() {
   const submitShop = () => {
     setOpen({ checkout: false, payment: true });
   }
->>>>>>> Authentication
 
   return (
-<<<<<<< HEAD
     <React.Fragment>
         <Container fixed> 
           <Grid container direction="row" spacing={2}>
@@ -391,7 +381,6 @@ function ProyectViewer() {
           </Grid>
         </Container>
     </React.Fragment>
-=======
     <div>
       {!project && (
         <Grid
@@ -591,7 +580,6 @@ function ProyectViewer() {
         </Grid>
       )}
     </div>
->>>>>>> Authentication
   );
 }
 
