@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
+import qs from 'querystring';
+import Axios from 'axios';
+
 /** Material UI */
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -25,8 +27,8 @@ import InsightsOne from '../../resources/images/clubcomplex-home-insights-1.png'
 import InsightsTwo from '../../resources/images/clubcomplex-home-insights-2.png';
 import InsightsThree from '../../resources/images/clubcomplex-home-insights-3.png';
 
+import { API_SIGNUP } from '../../helpers/apiUrls.helper';
 import Auth from '../../services/Authorization';
-import ContextClient from '../../helpers/ContextClient';
 
 function LandingPageInfo() {
   const componentStyle = makeStyles((theme) => ({
@@ -303,7 +305,7 @@ function LandingPageForm() {
   );
 }
 
-function LandingPage({ auth }) {
+function LandingPage() {
   const componentStyle = makeStyles((theme) => ({
     landingPage: {
       height: '100%',
@@ -314,7 +316,6 @@ function LandingPage({ auth }) {
       backgroundPosition: 'center'
     },
     content: {
-      marginTop: theme.spacing(8),
       marginBottom: theme.spacing(18)
     },
     form: {
@@ -323,51 +324,21 @@ function LandingPage({ auth }) {
       height: 220,
       margin: theme.spacing(2),
       padding: theme.spacing(2)
-    },
-    paper: {
-      width: 400,
-      padding: theme.spacing(3)
-    },
-    submit: {
-      margin: theme.spacing(3, 0, 2),
     }
   }));
-
-  const UserAuthenticated = () => {
-    return (
-      <Paper elevation={4} className={classes.paper} style={{ textAlign: 'center' }}>
-        <Typography variant="h6" component="h6" color="primary">¡Cónoce nuestros proyectos!</Typography>
-        <Typography variant="body1" paragraph>
-          Ya eres parte de Club Complex. Ingresa aquí para ver los proyectos en los que puedes invertir fácilmente.
-        </Typography>
-        <Button
-          fullWidth
-          variant="contained"
-          color="primary"
-          className={classes.submit}
-          component={RouterLink}
-          to="/dashboard"
-        >
-          VER PROYECTOS
-        </Button>
-      </Paper>
-    );
-  }
-
   const classes = componentStyle();
   return (
     <React.Fragment>
       <Grid container component="main" className={classes.landingPage}>
         <Container fixed>
-            <Menu origin="/" />
+          <Menu />
           <Grid container direction="row" spacing={4} alignItems="center" className={classes.content}>
             <Grid item xs={12} sm={12} md={6} lg={6}>
               <LandingPageInfo />
             </Grid>
             <Grid item xs={12} sm={12} md={6} lg={6}>
               <Box display="flex" justifyContent="flex-end">
-                {!auth && <LandingPageForm />}
-                {auth && <UserAuthenticated />}
+                <LandingPageForm />
               </Box>
             </Grid>
           </Grid>
@@ -600,19 +571,13 @@ function Insights() {
 
 export default function Home() {
   return (
-    <ContextClient.Consumer>
-      {({ authenticated }) => {
-        return (
-          <div>
-            <CssBaseline />
-            <LandingPage auth={authenticated} />
-            <Features />
-            <HowItWorks />
-            <Insights />
-            <Footer />
-          </div>
-        );
-      }}
-    </ContextClient.Consumer>
+    <div>
+      <CssBaseline />
+      <LandingPage />
+      <Features />
+      <HowItWorks />
+      <Insights />
+      <Footer />
+    </div>
   );
 }

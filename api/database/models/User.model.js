@@ -21,6 +21,10 @@ let userSchema = new Schema({
     unique: true,
     required: [true, 'El correo es necesario']
   },
+  phone: {
+    type: String,
+    required: [true, 'El teléfono es necesario']
+  },
   city: {
     type: String,
     required: [true, 'La ciudad es necesaria']
@@ -34,7 +38,25 @@ let userSchema = new Schema({
     default: 'USER',
     required: [true],
     enum: allowedRoles
+  },
+  profilePic: {
+    type: String
+  },
+  accountBalance: {
+    type: Number,
+    default: 0
+  },
+  portfolioId: {
+    type: String
+  },
+  referralCode: {
+    type: String
+  },
+  referralByUser: {
+    type: String,
+    default: null
   }
+  
 })
 
 userSchema.methods.toJSON = function () {

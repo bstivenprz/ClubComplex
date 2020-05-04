@@ -1,9 +1,9 @@
 const path = require('path');
-const fs = require('fs')
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const Dotenv = require('dotenv-webpack');
 require('dotenv').config({ path: path.join(__dirname, '../config/.env') });
 
-module.exports = {
+module.exports = [{
   mode: 'development',
   entry: path.resolve(__dirname, 'src', 'index.js'),
   stats: 'minimal',
@@ -31,8 +31,15 @@ module.exports = {
       {
         test: /\.(png|svg|jpg|git)$/,
         use: [ 'file-loader' ],
+      },
+      {
+        test: /\.css$/i,
+        loader: 'style-loader!css-loader'
       }
     ]
   },
-  plugins: [new HtmlWebpackPlugin({ template: path.resolve(__dirname, 'public', 'index.html') })]
-};
+  plugins: [
+    new HtmlWebpackPlugin({ template: path.resolve(__dirname, 'public', 'index.html') }),
+    new Dotenv({ path: path.resolve(__dirname, '../config', '.env') })
+  ]
+}];

@@ -1,5 +1,6 @@
 const express = require('express')
 const helmet = require('helmet')
+const cors = require('cors')
 const glob = require('glob')
 const bodyParser = require('body-parser')
 const path = require('path')
@@ -27,6 +28,22 @@ glob(routesPath, function (error, files) {
   files.forEach((file) => require(file)(app))
   console.log('Server: 🚀 GO!')
 })
+
+/** Cors Policy */
+const allowedOrigins = [
+  process.env.CORS_ORIGIN_CLIENT_HOST
+]
+
+app.use(cors({
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true)
+    if (allowedOrigins.indexOf(origin) === -1) {
+      return callback(new Error('Request origin host not allowed by CORS policy.'), false)
+    }
+    return callback(null, true);
+  },
+  credentials: true
+}))
 
 /** Creating and running API Server */
 const server = app.listen(process.env.SERVER_PORT, process.env.HOST, function () {
