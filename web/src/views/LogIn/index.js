@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useState, useContext, useEffect, useRef } from 'react';
+import { Link as RouterLink } from 'react-router-dom';
+import { makeStyles } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
 import Avatar from '@material-ui/core/Avatar';
 import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
 import Link from '@material-ui/core/Link';
 import Paper from '@material-ui/core/Paper';
@@ -9,12 +11,13 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
-import { makeStyles } from '@material-ui/core/styles';
-import { Link as RouterLink } from 'react-router-dom';
-
+import Alert from '@material-ui/lab/Alert';
+import Snackbar from '@material-ui/core/Snackbar';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import BackgroundImage from '../../resources/images/clubcomplex-login-background.jpg';
 import Logo from '../../resources/images/clubcomplex-blue-logo.png';
 import Footer from '../../components/secondary-footer';
+import ContextClient from '../../helpers/ContextClient';
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -51,11 +54,65 @@ const useStyles = makeStyles((theme) => ({
   },
   signupForm: {
     margin: theme.spacing(6, 4)
+  },
+  wrapper: {
+    width: '100%',
+    margin: theme.spacing(1),
+    position: 'relative',
+  },
+  buttonProgress: {
+    color: theme.palette.primary,
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    marginTop: -12,
+    marginLeft: -12,
   }
 }));
 
-export default function SignInSide() {
+export default function SignInSide(props) {
+  const { logIn } = useContext(ContextClient);
   const classes = useStyles();
+  const [isLoading, setIsLoading] = useState(false);
+  const [LogInFormData, setLogInFormData] = useState({});
+  const [ShowAlert, setShowAlert] = useState({ state: false, type: 'warning', message: '' });
+  const isMounted = useRef(null);
+
+  useEffect(() => {
+    isMounted.current = true;
+    return () => isMounted.current = false;
+  }, [])
+
+  const handleFormImputs = (event) => {
+    setLogInFormData({ ...LogInFormData, [event.target.name]: event.target.value });
+  }
+
+  const handleClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    setShowAlert({ ...ShowAlert, state: false });
+  };
+
+  const sendLogIn = (event) => {
+    event.preventDefault();
+    setIsLoading(true);
+    logIn(LogInFormData.email, LogInFormData.password)
+    .then((response) => {
+      setShowAlert({ state: response.authenticated, type: 'success', message: `Bienvenido ${response.user.firstName}` });
+      props.history.push('/dashboard');
+    })
+    .catch(error => {
+      console.log(error)
+      const { data } = error.response;
+      setShowAlert({ state: true, type: 'error', message: data.error.message });
+    })
+    .finally(() => {
+      if (isMounted.current) {
+        setIsLoading(false)
+      }
+    })
+  }
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -70,38 +127,49 @@ export default function SignInSide() {
           <Typography component="h1" variant="h5">
             Ingresar
           </Typography>
-          <form className={classes.form} noValidate>
+          <Snackbar anchorOrigin={{ vertical: "top", horizontal: "right" }} open={ShowAlert.state} autoHideDuration={4000} onClose={handleClose}>
+            <Alert onClose={handleClose} severity={ShowAlert.type}>
+              {ShowAlert.message}
+            </Alert>
+          </Snackbar>
+          <form className={classes.form} onSubmit={sendLogIn}>
             <TextField
-              variant="outlined"
+              label="Correo electrónico"
+              id="email"
+              name="email"
               margin="normal"
+              variant="outlined"
+              autoComplete="email"
+              onChange={handleFormImputs}
               required
               fullWidth
-              id="email"
-              label="Correo electrónico"
-              name="email"
-              autoComplete="email"
               autoFocus
             />
             <TextField
-              variant="outlined"
+              label="Contraseña"
+              id="password"
+              name="password"
               margin="normal"
+              variant="outlined"
+              autoComplete="current-password"
+              type="password"
+              onChange={handleFormImputs}
               required
               fullWidth
-              name="password"
-              label="Contraseña"
-              type="password"
-              id="password"
-              autoComplete="current-password"
             />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-            >
-              Ingresar
-            </Button>
+            <div className={classes.wrapper}>
+              <Button
+                fullWidth
+                type="submit"
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+                disabled={isLoading}
+              >
+                Ingresar
+              </Button>
+              {isLoading && <CircularProgress size={24} className={classes.buttonProgress} />}
+            </div>
             <Grid container>
               <Grid item xs>
                 <Link variant="body2" component={RouterLink} to="/restore-password">

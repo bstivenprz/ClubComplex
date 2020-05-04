@@ -1,0 +1,12 @@
+.ExampleSliders .Slider-slides > div {
+    padding: 100px 0;
+    font-size: 100px;
+    line-height: 100px;
+    height: 300px;
+    color: #fff;
+    text-align: center;
+  }
+
+  .Slider {
+    margin: 15px 0;
+  }

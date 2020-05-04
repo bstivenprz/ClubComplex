@@ -12,6 +12,7 @@ mongoose.connect(uri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   serverSelectionTimeoutMS: 5000,
+  useFindAndModify: false,
   useCreateIndex: true
 }).catch(console.error)
 

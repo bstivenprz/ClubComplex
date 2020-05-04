@@ -1,6 +1,7 @@
-const LoginController = require('../controllers/Login.controller')
-const SignUpController = require('../controllers/SignUp.controller')
+const AuthenticationController = require('../controllers/Authentication.controller')
+
 module.exports = (app) => {
-    app.post('/login', LoginController)
-    app.post('/signup', SignUpController)
+    app.post('/authentication/login', AuthenticationController.logIn)
+    app.post('/authentication/signup', AuthenticationController.signUp)
+    app.post('/authentication/verifysession', AuthenticationController.verifySession)
 }
