@@ -10,7 +10,6 @@ import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
 import { Link as RouterLink } from 'react-router-dom';
 import { Typography, Box } from '@material-ui/core';
-import SimpleImageSlider from "react-simple-image-slider";
 
 import ExpandLess from '@material-ui/icons/ExpandLess';
 import ExpandMore from '@material-ui/icons/ExpandMore';
@@ -18,7 +17,6 @@ import ExpandMore from '@material-ui/icons/ExpandMore';
 import StarBorder from '@material-ui/icons/StarBorder';
 import Collapse from '@material-ui/core/Collapse';
 
-import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import IconButton from '@material-ui/core/IconButton';
 import Avatar from '@material-ui/core/Avatar';
@@ -57,7 +55,6 @@ import ContextClient from '../../helpers/ContextClient';
 
 import ProyectImage from '../../resources/images/clubcomplex-proyect-image-1.jpeg';
 
-function Profile() {
 function HeroHeader() {
   const componentStyle = makeStyles((theme) => ({
     hero: {
@@ -257,97 +254,6 @@ function ProyectReview(props) {
   }));
   const classes = componentStyle();
 
-function TechnicsSpecificationList({ items }) {
-  const componentStyle = makeStyles((theme) => ({
-    itemText: {
-      '&.MuiListItemText-root': {
-        marginTop: 0,
-        marginBottom: 0
-      }
-    }
-  }));
-  const classes = componentStyle();
-  return (
-    <div style={{ width: '100%' }}>
-      <List dense={true} disablePadding={false}>
-        {items.map(({ title, content }, key) => {
-          return (
-            <ListItem dense={true} key={key}>
-              <ListItemText className={classes.itemText}>
-                <Typography variant="subtitle2"><strong>{title}</strong></Typography>
-              </ListItemText>
-              <ListItemSecondaryAction>
-                <Typography variant="body2">{content}</Typography>
-              </ListItemSecondaryAction>
-            </ListItem>
-          );
-        })}
-      </List>
-    </div>
-  );
-}
-
-function ProyectViewer() {
-  const componentStyle = makeStyles((theme) => ({
-    paper: {
-      padding: theme.spacing(2)
-    }
-  }));
-  const classes = componentStyle();
-  const images = [
-    { url: ProyectImage },
-    { url: BackgroundImage }
-  ]
-  const items = [
-    { title: 'Destino', content: 'Venta' },
-    { title: 'Área construida', content: '135 \u33A1' },
-    { title: 'Área rentable', content: '46 \u33A1' },
-    { title: 'Área vendible', content: '58 \u33A1' },
-    { title: 'Inversión estimada', content: '$ 1.353.235,26' },
-    { title: 'Utilidad estimada', content: '$ 1.353.235,26' },
-    { title: 'Rentabilidad', content: '$ 1.353.235,26' },
-    { title: 'TIR', content: '$ 1.353.235,26' },
-    { title: 'Coeficiente mercado', content: '35.3' },
-    { title: 'Índice Complex', content: '35.3' },
-    { title: 'Cantidad de títulos', content: '6' },
-    { title: 'Cantidad de títulos disponibles', content: '6' },
-    { title: 'Valor del título', content: '$ 1.353.235,26' },
-    { title: 'Renta del título', content: '$ 425.246,74 /mes' }
-  ]
-  return (
-    <Paper className={classes.paper}>
-      <Grid container>
-        <Grid item xs={12} sm={12} md={12}>
-          <Typography variant="h5" component="h5">Casa Luna del Vallés</Typography>
-          <Typography variant="body2">Propiedad #136136113</Typography>
-          <Grid container>
-            <Grid item xs>
-              <Typography variant="body1">La Ceja, Antioquia, Colombia.</Typography>
-            </Grid>
-            <Grid>
-              <Link href="https://maps.google.com/" color="primary">
-                Ver mapa
-              </Link>
-            </Grid>
-          </Grid>
-        </Grid>
-        <Grid item xs={12} sm={12} md={6}>
-          {/* <SimpleImageSlider width={430} height={272} images={images} /> */}
-          <Typography variant="body1"><strong>Descripción</strong></Typography>
-          <Typography variant="body2" paragraph>
-            Esta es una descripción corta a cerca del proyecto 
-            Casa luna del Vallés en el municipio de La Ceja.
-            Se pueden agregar máximo 3 líneas de descripción.
-          </Typography>
-        </Grid>
-        <Grid item xs={12} sm={12} md={6}>
-          <Typography variant="body1"><strong>Especificaciones Técnicas</strong></Typography>
-          <TechnicsSpecificationList items={items} />
-        </Grid>
-      </Grid>
-    </Paper>
-  );
-}
   const [open, setOpen] = React.useState({
     checkout: false,
     payment: false
@@ -366,21 +272,6 @@ function ProyectViewer() {
   }
 
   return (
-    <React.Fragment>
-        <Container fixed> 
-          <Grid container direction="row" spacing={2}>
-            <Grid item xs={12} sm={12} md={3} lg={3}>
-              <Profile />
-            </Grid>
-            <Grid item xs={12} sm={12} md={3} lg={3}>
-              <ProyectList />
-            </Grid>
-            <Grid item xs={12} sm={12} md={6} lg={6}>
-              <ProyectViewer />
-            </Grid>
-          </Grid>
-        </Container>
-    </React.Fragment>
     <div>
       {!project && (
         <Grid
