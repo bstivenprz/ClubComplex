@@ -10,7 +10,7 @@ require('dotenv').config({ path: path.join(__dirname, '../config/.env') })
 
 mongoose.connect(uri, {
   useNewUrlParser: true,
-  useUnifiedTopology: true,
+  useUnifiedTopology: false,
   serverSelectionTimeoutMS: 5000,
   useFindAndModify: false,
   useCreateIndex: true
