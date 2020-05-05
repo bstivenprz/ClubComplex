@@ -5,7 +5,7 @@ const host = process.env.DB_HOST;
 const database = process.env.DB_NAME;
 const user = process.env.DB_USER;
 const password = process.env.DB_PASSWORD;
-const uri = `mongodb+srv://${user}:${password}@${host}/${database}`;
+const uri = `mongodb+srv://${user}:${password}@${host}/${database}?retryWrites=true&w=majority`;
 require("dotenv").config({ path: path.join(__dirname, "../config/.env") });
 
 mongoose
