@@ -401,7 +401,7 @@ export default function MainMenu() {
                           <ListItemIcon>
                             <AttachMoneyIcon fontSize="large" />
                           </ListItemIcon>
-                          <ListItemText primary="Saldo en cuenta" secondary={`$ 0`} />
+                          <ListItemText primary="Saldo en cuenta" secondary={user && '$ ' + Intl.NumberFormat('de-DE', { style: 'currency', currency: 'COP' }).format(user.accountBalance)} />
                         </MenuItem>
                         <Divider />
                         <ListSubheader component="div" id="nested-list-subheader">
@@ -424,7 +424,7 @@ export default function MainMenu() {
                           <ListItemIcon>
                             <SupervisorAccountIcon />
                           </ListItemIcon>
-                          <ListItemText primary="Código de invitación" secondary={'referralCode && referralCode'} />
+                          <ListItemText primary="Código de invitación" secondary={user && user.referralCode} />
                         </MenuItem>
                         <MenuItem onClick={() => handleProfileOpen('profile')} >
                           <ListItemIcon>
