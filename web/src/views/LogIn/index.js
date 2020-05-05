@@ -1,41 +1,49 @@
-import React, { useState, useContext, useEffect, useRef } from 'react';
-import { Link as RouterLink } from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
-import Link from '@material-ui/core/Link';
-import Paper from '@material-ui/core/Paper';
-import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import Alert from '@material-ui/lab/Alert';
-import Snackbar from '@material-ui/core/Snackbar';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import BackgroundImage from '../../resources/images/clubcomplex-login-background.jpg';
-import Logo from '../../resources/images/clubcomplex-blue-logo.png';
-import Footer from '../../components/secondary-footer';
-import ContextClient from '../../helpers/ContextClient';
+import React, { useState, useContext, useEffect, useRef } from "react";
+import { Link as RouterLink } from "react-router-dom";
+
+/** Materila UI */
+import { makeStyles } from "@material-ui/core/styles";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import TextField from "@material-ui/core/TextField";
+import Link from "@material-ui/core/Link";
+import Paper from "@material-ui/core/Paper";
+import Box from "@material-ui/core/Box";
+import Grid from "@material-ui/core/Grid";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Typography from "@material-ui/core/Typography";
+import Snackbar from "@material-ui/core/Snackbar";
+import CircularProgress from "@material-ui/core/CircularProgress";
+import Alert from "@material-ui/lab/Alert";
+
+/** Media Files */
+import BackgroundImage from "../../resources/images/clubcomplex-login-background.jpg";
+import Logo from "../../resources/images/clubcomplex-blue-logo.png";
+
+/** Components */
+import Footer from "../../components/secondary-footer";
+import ContextClient from "../../helpers/ContextClient";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    height: '100vh',
+    height: "100vh",
   },
   image: {
     backgroundImage: `url(${BackgroundImage})`,
-    backgroundRepeat: 'no-repeat',
+    backgroundRepeat: "no-repeat",
     backgroundColor:
-      theme.palette.type === 'light' ? theme.palette.grey[50] : theme.palette.grey[900],
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
+      theme.palette.type === "light"
+        ? theme.palette.grey[50]
+        : theme.palette.grey[900],
+    backgroundSize: "cover",
+    backgroundPosition: "center",
   },
   paper: {
     margin: theme.spacing(8, 4),
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
   },
   avatar: {
     margin: theme.spacing(1),
@@ -43,31 +51,31 @@ const useStyles = makeStyles((theme) => ({
   },
   logo: {
     margin: theme.spacing(1, 1, 4, 1),
-    height: '50px'
+    height: "50px",
   },
   form: {
-    width: '100%', // Fix IE 11 issue.
+    width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
   },
   signupForm: {
-    margin: theme.spacing(6, 4)
+    margin: theme.spacing(6, 4),
   },
   wrapper: {
-    width: '100%',
+    width: "100%",
     margin: theme.spacing(1),
-    position: 'relative',
+    position: "relative",
   },
   buttonProgress: {
     color: theme.palette.primary,
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
+    position: "absolute",
+    top: "50%",
+    left: "50%",
     marginTop: -12,
     marginLeft: -12,
-  }
+  },
 }));
 
 export default function SignInSide(props) {
@@ -75,20 +83,27 @@ export default function SignInSide(props) {
   const classes = useStyles();
   const [isLoading, setIsLoading] = useState(false);
   const [LogInFormData, setLogInFormData] = useState({});
-  const [ShowAlert, setShowAlert] = useState({ state: false, type: 'warning', message: '' });
+  const [ShowAlert, setShowAlert] = useState({
+    state: false,
+    type: "warning",
+    message: "",
+  });
   const isMounted = useRef(null);
 
   useEffect(() => {
     isMounted.current = true;
-    return () => isMounted.current = false;
-  }, [])
+    return () => (isMounted.current = false);
+  }, []);
 
   const handleFormImputs = (event) => {
-    setLogInFormData({ ...LogInFormData, [event.target.name]: event.target.value });
-  }
+    setLogInFormData({
+      ...LogInFormData,
+      [event.target.name]: event.target.value,
+    });
+  };
 
   const handleClose = (event, reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
     setShowAlert({ ...ShowAlert, state: false });
@@ -98,21 +113,29 @@ export default function SignInSide(props) {
     event.preventDefault();
     setIsLoading(true);
     logIn(LogInFormData.email, LogInFormData.password)
-    .then((response) => {
-      setShowAlert({ state: response.authenticated, type: 'success', message: `Bienvenido ${response.user.firstName}` });
-      props.history.push('/dashboard');
-    })
-    .catch(error => {
-      console.log(error)
-      const { data } = error.response;
-      setShowAlert({ state: true, type: 'error', message: data.error.message });
-    })
-    .finally(() => {
-      if (isMounted.current) {
-        setIsLoading(false)
-      }
-    })
-  }
+      .then((response) => {
+        setShowAlert({
+          state: response.authenticated,
+          type: "success",
+          message: `Bienvenido ${response.user.firstName}`,
+        });
+        props.history.push("/dashboard");
+      })
+      .catch((error) => {
+        console.log(error);
+        const { data } = error.response;
+        setShowAlert({
+          state: true,
+          type: "error",
+          message: data.error.message,
+        });
+      })
+      .finally(() => {
+        if (isMounted.current) {
+          setIsLoading(false);
+        }
+      });
+  };
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -127,7 +150,12 @@ export default function SignInSide(props) {
           <Typography component="h1" variant="h5">
             Ingresar
           </Typography>
-          <Snackbar anchorOrigin={{ vertical: "top", horizontal: "right" }} open={ShowAlert.state} autoHideDuration={4000} onClose={handleClose}>
+          <Snackbar
+            anchorOrigin={{ vertical: "top", horizontal: "right" }}
+            open={ShowAlert.state}
+            autoHideDuration={4000}
+            onClose={handleClose}
+          >
             <Alert onClose={handleClose} severity={ShowAlert.type}>
               {ShowAlert.message}
             </Alert>
@@ -168,11 +196,20 @@ export default function SignInSide(props) {
               >
                 Ingresar
               </Button>
-              {isLoading && <CircularProgress size={24} className={classes.buttonProgress} />}
+              {isLoading && (
+                <CircularProgress
+                  size={24}
+                  className={classes.buttonProgress}
+                />
+              )}
             </div>
             <Grid container>
               <Grid item xs>
-                <Link variant="body2" component={RouterLink} to="/restore-password">
+                <Link
+                  variant="body2"
+                  component={RouterLink}
+                  to="/restore-password"
+                >
                   ¿Olvidaste tu contraseña?
                 </Link>
               </Grid>
@@ -184,9 +221,7 @@ export default function SignInSide(props) {
                 ¿No tienes una cuenta?
               </Typography>
               <Typography component="h4" variant="h4" align="center">
-                <Box fontWeight="fontWeightBold">
-                  Regístrate Gratis
-                </Box>
+                <Box fontWeight="fontWeightBold">Regístrate Gratis</Box>
               </Typography>
               <Button
                 fullWidth

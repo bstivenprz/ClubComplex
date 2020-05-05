@@ -40,7 +40,6 @@ exports.logIn = async (req, res) => {
 
         let tokenExpiration = parseInt(process.env.EXPIRATION_TOKEN, 10)
         let token = jwt.sign({ user: dbUser }, seedJwtAuthentication, { expiresIn: tokenExpiration })
-        res.cookie('authorization_token', `Bearer ${token}`, { expires: new Date(Date.now() + tokenExpiration) })
         res.json({
             authenticationSuccess: true,
             tokenAuthorization: token,
@@ -52,8 +51,9 @@ exports.logIn = async (req, res) => {
 exports.signUp = async (req, res) => {
     try {
         let body = req.body
-        let { signupFirstName, signupLastName, signupEmail, signupPhone, signupCity, signupPassword, role } = body
-        let user = new User({
+        let { signupFirstName, signupLastName, signupEmail, signupPhone, signupCity, signupPassword, signupReferralCode, role } = body
+
+        const newUser = {
             firstName: signupFirstName,
             lastName: signupLastName,
             email: signupEmail,
@@ -63,8 +63,24 @@ exports.signUp = async (req, res) => {
             role,
             profilePic: defaultProfilePic,
             referralCode: generateReferralCode(6)
-        })
-    
+        }
+
+        if (signupReferralCode && signupReferralCode.length) {
+            const referralUser = await User.findOne({ referralCode: signupReferralCode }).exec()
+            console.log(referralUser)
+            if (referralUser) {
+                newUser.referralByUser = referralUser._id
+            } else {
+                res.status(400).json({
+                    success: false,
+                    type: 'error',
+                    message: 'El código de invitación no existe.'
+                })
+            }
+        }
+
+        let user = new User(newUser)
+
         user.save(async (error, dbUser) => {
             if (error) {
                 let response = { succes: false }
