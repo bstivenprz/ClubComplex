@@ -94,9 +94,7 @@ exports.signUp = async (req, res) => {
             </head>
             <body>
                 <p><strong>¡Bienvenido ${dbUser.firstName}!</strong></p>
-                <p>Creaste una cuenta en Club Complex y ya puedes ingresar a tu cuenta con tu
-                    correo electrónico y contraseña y comenzar a invertir en proyectos inmuebles desde internet.
-                </p>
+                <p>Creaste una cuenta en Club Complex, ingresa y disfruta los beneficios de poder invertir en inmuebles desde la comodidad de tu hogar.</p>
                 <a href="http://${process.env.HOST}/login"><strong>Ingresa a tu cuenta aquí http://${process.env.HOST}/login</strong></a>   
             </body>
             </html>
