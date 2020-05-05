@@ -57,7 +57,7 @@ let projectSchema = new mongoose.Schema({
             type: Number
         },
         titleIncome: {
-            type: Number
+            type: String
         }
     }
 })
