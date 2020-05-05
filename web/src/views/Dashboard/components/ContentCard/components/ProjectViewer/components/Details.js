@@ -209,12 +209,7 @@ export default function ProjectDetails(props) {
           <ListItem>
             <ListItemText>Renta del título</ListItemText>
             <ListItemSecondaryAction>
-              {project &&
-                "$ " +
-                  Intl.NumberFormat("de-DE", {
-                    style: "currency",
-                    currency: "COP",
-                  }).format(project.technicsSpecifications.titleIncome)}
+              {project && project.technicsSpecifications.titleIncome}
             </ListItemSecondaryAction>
           </ListItem>
         )}
