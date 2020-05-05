@@ -14,7 +14,8 @@ class ContextClientProvider extends Component {
         this.state = {
             authenticated: false,
             user: null,
-            logIn: this.logIn.bind(this)
+            logIn: this.logIn.bind(this),
+            updateContextUser: this.updateContextUser.bind(this)
         }
     }
 
@@ -33,6 +34,13 @@ class ContextClientProvider extends Component {
             }).catch(error => {
                 return reject(error);
             })
+        })
+    }
+
+    updateContextUser(user) {
+        this.setState({
+            ...this.state,
+            user
         })
     }
 

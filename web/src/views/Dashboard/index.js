@@ -49,7 +49,7 @@ import BackgroundImage from '../../resources/images/clubcomplex-home-background.
 import PayPalLogo from '../../resources/images/paypal-logo.jpg';
 import ProjectImage from '../../resources/images/projectImage.jpg';
 
-import { API_PROJECTS_LIST, API_PROJECTS } from '../../helpers/apiUrls.helper';
+import { API_PROJECTS_LIST, API_PROJECTS, API_SHOP_CHECKOUT } from '../../helpers/apiUrls.helper';
 
 import ContextClient from '../../helpers/ContextClient';
 
@@ -167,8 +167,8 @@ function Checkout(props) {
 }
 
 function ProyectReview(props) {
-  const { project } = props;
-
+  const { project, user } = props;
+  const { updateContextUser } = useContext(ContextClient);
   const [isLoading, setIsLoading] = useState(false);
   const [Quantity, setQuantity] = useState(1);
   const [totalValue, setTotalValue] = useState(0);
@@ -268,7 +268,15 @@ function ProyectReview(props) {
   };
 
   const submitShop = () => {
-    setOpen({ checkout: false, payment: true });
+    Axios.post(API_SHOP_CHECKOUT, { userId: user._id, total: totalValue })
+    .then(({ data }) => {
+      updateContextUser(data.user);
+      setOpen({ checkout: false, payment: true });
+    })
+    .catch(error => {
+      console.log(error)
+    }).then(_ => {
+    })
   }
 
   return (
@@ -474,7 +482,7 @@ function ProyectReview(props) {
   );
 }
 
-function ContentCard() {
+function ContentCard(props) {
   const [isLoading, setIsLoading] = useState(false);
   const [projectList, setProjectList] = useState([]);
   const [projectSelected, setProjectSelected] = useState(null);
@@ -592,7 +600,7 @@ function ContentCard() {
                 </div>
               </Grid>
               <Grid item xs={9} sm={9} md={9}>
-                <ProyectReview project={projectSelected} />
+                <ProyectReview project={projectSelected} user={props.user} />
               </Grid>
             </Grid>
           </Paper>
@@ -603,15 +611,20 @@ function ContentCard() {
 }
 
 export default function Dashboard(props) {
-  const { authenticated } = useContext(ContextClient);
 
   return (
-    <div>
-      <CssBaseline />
-      <MainMenu />
-      <HeroHeader />
-      <ContentCard />
-      <Footer />
-    </div>
+    <ContextClient.Consumer>
+      {({ user }) => {
+        return (
+          <div>
+            <CssBaseline />
+            <MainMenu />
+            <HeroHeader />
+            <ContentCard user={user} />
+            <Footer />
+          </div>
+        );
+      }}
+    </ContextClient.Consumer>
   );
 }

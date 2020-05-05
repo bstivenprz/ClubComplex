@@ -446,7 +446,7 @@ function Features() {
       title: 'Invierte cupando quieras',
       content: `
         Tienes la libertad y flexibilidad de invertir
-        cuándo quieras, así nunca te perderás los
+        cuando quieras, así nunca te perderás los
         momentos importantes de tu vida. Haz que el
         dinero trabaje para ti y gana libertad.
       `

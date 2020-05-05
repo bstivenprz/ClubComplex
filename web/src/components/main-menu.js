@@ -48,6 +48,7 @@ import Auth from '../services/Authorization';
 import { API_USER_EDIT } from '../helpers/apiUrls.helper';
 
 import { ContextClientConsumer } from '../helpers/ContextClient';
+import moment from 'moment';
 
 function History(props) {
   const { onClose, open, user } = props;
@@ -58,12 +59,22 @@ function History(props) {
         </DialogTitle>
         <DialogContent>
           <List>
-            <ListItem>
-              <ListItemText primary="Compra de título" secondary="4/05/2020 12:36 a.m." />
-              <ListItemSecondaryAction>
-                $ 424.246,00 COP
-              </ListItemSecondaryAction>
-            </ListItem>
+            {user && user.transactions.length === 0 ? (
+              <ListItem>
+                <ListItemText primary="No hay transacciones." />
+              </ListItem>
+            ) : null}
+            {user && user.transactions.map((transaction, key) => {
+              const { transactionValue, transactionDate } = transaction;
+              return (
+                <ListItem key={key}>
+                  <ListItemText primary="Compra de título" secondary={moment(transactionDate).format('DD/MM/YYYY HH:mm:ss')} />
+                  <ListItemSecondaryAction>
+                    {'$ ' + Intl.NumberFormat('de-DE', { style: 'currency', currency: 'COP' }).format(transactionValue)}
+                  </ListItemSecondaryAction>
+                </ListItem>
+              );
+            })}
           </List>
         </DialogContent>
         <DialogActions>
@@ -80,16 +91,25 @@ function Titles(props) {
   return (
     <Dialog onClose={() => onClose('titles')} aria-labelledby="customized-dialog-title" open={open} maxWidth="xs" fullWidth>
         <DialogTitle id="customized-dialog-title" onClose={onClose}>
-          Títulos (1)
+          {`Títulos (${user && user.titles.length})`}
         </DialogTitle>
         <DialogContent>
           <List>
-            <ListItem>
-              <ListItemText primary="Casita" secondary="Título # 31jet313513" />
-              <ListItemSecondaryAction>
-                $ 424.246,00 COP
-              </ListItemSecondaryAction>
-            </ListItem>
+            {user && user.titles.length === 0 ? (
+              <ListItem>
+                <ListItemText primary="No tienes títulos aún." />
+              </ListItem>
+            ) : null}
+            {user && user.titles.map((title, key) => {
+              return (
+                <ListItem key={key}>
+                  <ListItemText primary={title.name} secondary={title.id} />
+                  <ListItemSecondaryAction>
+                    {title.value}
+                  </ListItemSecondaryAction>
+                </ListItem>
+              );
+            })}
           </List>
         </DialogContent>
         <DialogActions>

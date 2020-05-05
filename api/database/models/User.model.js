@@ -46,9 +46,18 @@ let userSchema = new Schema({
     type: Number,
     default: 0
   },
-  portfolioId: {
-    type: String
-  },
+  titles: [],
+  transactions: [{
+    transactionName: {
+      type: String
+    },
+    transactionValue: {
+      type: Number
+    },
+    transactionDate: {
+      type: Date
+    }
+  }],
   referralCode: {
     type: String
   },
