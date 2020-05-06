@@ -44,7 +44,7 @@ export default function ConfirmPayment(props) {
           <ListItem>
             <ListItemText
               primary="Bancolombia (Ahorros)"
-              secondary="13-351-513"
+              secondary="272-000310-46"
             />
           </ListItem>
           <Divider />
