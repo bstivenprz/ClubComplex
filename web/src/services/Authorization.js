@@ -39,7 +39,7 @@ class Auth {
 
     logOut() {
         sessionStorage.removeItem(sessionStorageName);
-        window.location.reload();
+        window.location.replace('/');
     }
 
     verifySession() {
