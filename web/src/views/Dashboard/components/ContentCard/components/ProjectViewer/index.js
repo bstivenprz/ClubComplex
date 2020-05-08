@@ -8,8 +8,8 @@ import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import Divider from "@material-ui/core/Divider";
-import ExposurePlus1Icon from "@material-ui/icons/ExposurePlus1";
-import ExposureNeg1Icon from "@material-ui/icons/ExposureNeg1";
+import Add from "@material-ui/icons/Add";
+import Remove from "@material-ui/icons/Remove";
 
 /** Components */
 import Slider from "../../../../../../components/image-slider";
@@ -109,7 +109,11 @@ export default function ProjectViewer(props) {
   };
 
   const submitShop = () => {
-    Axios.post(API_SHOP_CHECKOUT, { userId: user._id, projectId: project._id, total: totalValue })
+    Axios.post(API_SHOP_CHECKOUT, {
+      userId: user._id,
+      projectId: project._id,
+      total: totalValue,
+    })
       .then(({ data }) => {
         updateContextUser(data.user);
         setOpen({ checkout: false, payment: true });
@@ -200,22 +204,27 @@ export default function ProjectViewer(props) {
                 alignItems="center"
               >
                 <Grid item xs={4} sm={4} md={4}>
-                  <Typography variant="caption" style={{ color: 'rgba(0, 0, 0, 0.4)' }} ><strong>Cantidad de títulos</strong></Typography>
+                  <Typography
+                    variant="caption"
+                    style={{ color: "rgba(0, 0, 0, 0.4)" }}
+                  >
+                    <strong>Cantidad de títulos</strong>
+                  </Typography>
                   <Grid
                     container
                     alignItems="center"
                     className={classes.selectQuantity}
                   >
                     <IconButton onClick={() => handleQuantity("rest")}>
-                      <ExposureNeg1Icon />
+                      <Remove />
                     </IconButton>
                     <Divider orientation="vertical" flexItem />
-                    {/* <Typography variant="body1" style={{ margin: 12 }}>
+                    <Typography variant="body1" style={{ margin: 12 }}>
                       <strong>{Quantity}</strong>
                     </Typography>
-                    <Divider orientation="vertical" flexItem /> */}
+                    <Divider orientation="vertical" flexItem />
                     <IconButton onClick={() => handleQuantity("add")}>
-                      <ExposurePlus1Icon />
+                      <Add />
                     </IconButton>
                   </Grid>
                 </Grid>
