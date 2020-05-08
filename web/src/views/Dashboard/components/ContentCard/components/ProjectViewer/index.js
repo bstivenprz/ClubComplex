@@ -190,6 +190,9 @@ export default function ProjectViewer(props) {
             </Typography>
             <Divider />
             <div className={classes.getTitles}>
+              <Typography variant="body1" gutterBottom>
+                <strong>Comprar títulos</strong>
+              </Typography>
               <Grid
                 container
                 direction="row"
@@ -197,6 +200,7 @@ export default function ProjectViewer(props) {
                 alignItems="center"
               >
                 <Grid item xs={4} sm={4} md={4}>
+                  <Typography variant="caption" style={{ color: 'rgba(0, 0, 0, 0.4)' }} ><strong>Cantidad de títulos</strong></Typography>
                   <Grid
                     container
                     alignItems="center"
