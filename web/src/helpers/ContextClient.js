@@ -45,7 +45,6 @@ class ContextClientProvider extends Component {
   }
 
   render() {
-    console.log("Context", this.state);
     const { children } = this.props;
     return <Provider value={this.state}>{children}</Provider>;
   }

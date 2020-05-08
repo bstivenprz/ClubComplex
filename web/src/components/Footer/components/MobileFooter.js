@@ -5,6 +5,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Link from "@material-ui/core/Link";
+import Box from '@material-ui/core/Box';
 
 /** Media Files */
 import Logo from "../../../resources/images/clubcomplex-white-logo.png";

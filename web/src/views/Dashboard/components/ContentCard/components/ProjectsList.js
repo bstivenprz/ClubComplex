@@ -50,7 +50,9 @@ export default function ProjectList(props) {
                 selectProject(projectId);
               }}
             >
-              <ListItemText primary={projectName} secondary={projectAddress} />
+              <ListItemText>
+                <Typography variant="body1" color="primary" style={{ textDecoration: 'underline' }} ><strong>{projectName}</strong></Typography>
+              </ListItemText>
               <ListItemSecondaryAction>
                 <IconButton edge="end">
                   <ArrowForwardIosIcon />

@@ -4,6 +4,7 @@ const jwt = require('jsonwebtoken')
 const User = require('../../database/models/User.model')
 const generateReferralCode = require('../helpers/generateReferralCode.helper')
 const sendEmailNotification = require('../helpers/sendEmailNotification.helper')
+const updateInsights =  require('../helpers/updateInsights.helper')
 const defaultProfilePic = '../../../web/src/resources/images/defaultProfilePicture.jpg'
 
 require('dotenv').config({ path: path.join(__dirname, '../../config/.env') })
@@ -117,6 +118,10 @@ exports.signUp = async (req, res) => {
             `
     
             await sendEmailNotification(dbUser.email, "Registro Club Complex", textBody, htmlBody);
+
+            const usersInApp = await User.countDocuments({}).exec();
+
+            await updateInsights('users', usersInApp);
     
             res.json({
                 success: true,

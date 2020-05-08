@@ -210,10 +210,10 @@ export default function ProjectViewer(props) {
                       <ExposureNeg1Icon />
                     </IconButton>
                     <Divider orientation="vertical" flexItem />
-                    <Typography variant="body1" style={{ margin: 12 }}>
+                    {/* <Typography variant="body1" style={{ margin: 12 }}>
                       <strong>{Quantity}</strong>
                     </Typography>
-                    <Divider orientation="vertical" flexItem />
+                    <Divider orientation="vertical" flexItem /> */}
                     <IconButton onClick={() => handleQuantity("add")}>
                       <ExposurePlus1Icon />
                     </IconButton>

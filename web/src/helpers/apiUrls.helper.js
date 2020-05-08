@@ -10,3 +10,5 @@ export const API_PROJECTS = API_HOST + 'projects';
 export const API_USER_EDIT = API_HOST + 'users/edit';
 
 export const API_SHOP_CHECKOUT = API_HOST + 'shop/checkout';
+
+export const API_ADMINISTRATION_INSIGHTS = API_HOST + 'administration/insights';

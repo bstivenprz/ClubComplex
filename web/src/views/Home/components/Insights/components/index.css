@@ -1,0 +1,21 @@
+.numberCircle {
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  padding: 32px;
+  margin: 12px auto;
+
+  background: #fff;
+  border: 7px solid rgb(0, 172, 237);
+  color: #666;
+  text-align: center;
+}
+
+.dividerCircle {
+  display: block;
+  height: 1px;
+  border: 0;
+  border-top: 4px solid rgb(0, 172, 237);
+  margin: 1em 0;
+  padding: 0;
+}

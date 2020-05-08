@@ -50,6 +50,7 @@ export default function ContentCard(props) {
       const response = await Axios.get(API_PROJECTS_LIST);
       if (response.status === 200) {
         setProjectList(response.data);
+        handleProjectsList(response.data[0].projectId);
       }
     } catch (error) {
       console.log(error.response.data);

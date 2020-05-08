@@ -22,7 +22,6 @@ class Auth {
         return new Promise((resolve, reject) => {
             Axios.post(API_AUTHENTICATION_LOGIN, qs.stringify({ email, password }), this.options)
             .then(({ data }) => {
-                console.log('Authorization Service: ', data);
                 this.authenticated = data.authenticationSuccess;
                 this.user = data.user;
                 sessionStorage.setItem(sessionStorageName, data.tokenAuthorization);
