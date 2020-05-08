@@ -109,7 +109,7 @@ export default function ProjectViewer(props) {
   };
 
   const submitShop = () => {
-    Axios.post(API_SHOP_CHECKOUT, { userId: user._id, total: totalValue })
+    Axios.post(API_SHOP_CHECKOUT, { userId: user._id, projectId: project._id, total: totalValue })
       .then(({ data }) => {
         updateContextUser(data.user);
         setOpen({ checkout: false, payment: true });

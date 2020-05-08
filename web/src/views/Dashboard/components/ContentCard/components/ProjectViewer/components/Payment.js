@@ -32,10 +32,10 @@ export default function ConfirmPayment(props) {
       </DialogTitle>
       <DialogContent>
         <Alert severity="success">
-          ¡Compra confirmada! y en estado en proceso.
+          ¡Compra confirmada!
         </Alert>
         <Typography variant="body1" style={{ margin: "20px 0" }}>
-          Le enviaremos un correo cuándo verifiquemos el pago.
+          Un agente Complex lo contactará.
         </Typography>
         <Typography variant="body1">
           <strong>Información de pago</strong>

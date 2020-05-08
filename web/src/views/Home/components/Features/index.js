@@ -35,7 +35,7 @@ export default function Features() {
         `,
     },
     {
-      title: "Invierte cupando quieras",
+      title: "Invierte cuando quieras",
       content: `
           Tienes la libertad y flexibilidad de invertir
           cuando quieras, así nunca te perderás los

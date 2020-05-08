@@ -60,7 +60,7 @@ export default function ProjectList(props) {
           );
         })}
       </List>
-      <Typography variant="body1" className={classes.listTitle}>
+      {/* <Typography variant="body1" className={classes.listTitle}>
         <strong>Medios de pago</strong>
       </Typography>
       <List dense>
@@ -78,7 +78,7 @@ export default function ProjectList(props) {
           </ListItemAvatar>
           <ListItemText primary="PayPal" />
         </ListItem>
-      </List>
+      </List> */}
     </div>
   );
 }

@@ -124,12 +124,7 @@ export default function ProjectDetails(props) {
           <ListItem>
             <ListItemText>Utilidad estimada</ListItemText>
             <ListItemSecondaryAction>
-              {project &&
-                "$ " +
-                  Intl.NumberFormat("de-DE", {
-                    style: "currency",
-                    currency: "COP",
-                  }).format(project.technicsSpecifications.estimatedProfit)}
+              {project && project.technicsSpecifications.estimatedProfit + ' %'}
             </ListItemSecondaryAction>
           </ListItem>
         )}

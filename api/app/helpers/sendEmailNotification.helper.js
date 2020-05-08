@@ -12,6 +12,9 @@ module.exports = async function (to, subject, textBody, htmlBody ) {
             auth: {
                 user: process.env.EMAIL_USER,
                 pass: process.env.EMAIL_PASSWORD
+            },
+            tls: {
+                rejectUnauthorized: false
             }
         })
     
@@ -30,9 +33,9 @@ module.exports = async function (to, subject, textBody, htmlBody ) {
         text: textBody,
         html: htmlBody
         }, (error, info) => {
+            if (error) console.log(error)
             console.log("Message sent: %s", info.messageId)
-            if (error || !omfp) return false
-            return info.messageId    
+            return info.messageId
             // Message sent: <b658f8ca-6296-ccf4-8306-87d57a0b4321@example.com>
         })
 
