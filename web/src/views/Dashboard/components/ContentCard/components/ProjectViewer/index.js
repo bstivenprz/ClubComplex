@@ -7,6 +7,7 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
+import Hidden from "@material-ui/core/Hidden";
 import Divider from "@material-ui/core/Divider";
 import Add from "@material-ui/icons/Add";
 import Remove from "@material-ui/icons/Remove";
@@ -120,8 +121,7 @@ export default function ProjectViewer(props) {
       })
       .catch((error) => {
         console.log(error);
-      })
-      .then((_) => {});
+      });
   };
 
   const handleQuantity = (val) => {
@@ -168,7 +168,13 @@ export default function ProjectViewer(props) {
           direction="row"
           style={{ minHeight: "40vh" }}
         >
-          <Grid item xs={8} className={classes.contentDescription}>
+          <Grid
+            item
+            xs={12}
+            sm={12}
+            md={8}
+            className={classes.contentDescription}
+          >
             <Typography variant="h6">{project && project.title}</Typography>
             <Typography
               variant="body2"
@@ -193,7 +199,83 @@ export default function ProjectViewer(props) {
               {project && project.description}
             </Typography>
             <Divider />
+            <Hidden mdDown>
+              <div className={classes.getTitles}>
+                <Typography variant="body1" gutterBottom>
+                  <strong>Comprar títulos</strong>
+                </Typography>
+                <Grid
+                  container
+                  direction="row"
+                  justify="center"
+                  alignItems="center"
+                >
+                  <Grid item xs={4} sm={4} md={4}>
+                    <Typography
+                      variant="caption"
+                      style={{ color: "rgba(0, 0, 0, 0.4)" }}
+                    >
+                      <strong>Cantidad de títulos</strong>
+                    </Typography>
+                    <Grid
+                      container
+                      alignItems="center"
+                      className={classes.selectQuantity}
+                    >
+                      <IconButton onClick={() => handleQuantity("rest")}>
+                        <Remove />
+                      </IconButton>
+                      <Divider orientation="vertical" flexItem />
+                      <Typography variant="body1" style={{ margin: 12 }}>
+                        <strong>{Quantity}</strong>
+                      </Typography>
+                      <Divider orientation="vertical" flexItem />
+                      <IconButton onClick={() => handleQuantity("add")}>
+                        <Add />
+                      </IconButton>
+                    </Grid>
+                  </Grid>
+                  <Grid item xs={4} sm={4} md={4}>
+                    <Typography
+                      variant="subtitle2"
+                      style={{ color: "rgba(0, 0, 0, 0.3)" }}
+                    >
+                      Total
+                    </Typography>
+                    <Typography variant="body1">
+                      <strong>
+                        ${" "}
+                        {Intl.NumberFormat("de-DE", {
+                          style: "currency",
+                          currency: "COP",
+                        }).format(totalValue)}
+                      </strong>
+                    </Typography>
+                    <Divider orientation="vertical" flexItem />
+                  </Grid>
+                  <Grid item xs={4} sm={4} md={4}>
+                    <div className={classes.wrapper}>
+                      <Button
+                        size="large"
+                        type="submit"
+                        variant="contained"
+                        color="primary"
+                        className={classes.submit}
+                        onClick={() => handlePaymentOpen("checkout")}
+                        fullWidth
+                      >
+                        Comprar títulos
+                      </Button>
+                    </div>
+                  </Grid>
+                </Grid>
+              </div>
+            </Hidden>
+          </Grid>
+          <ProjectDetails project={project} />
+          <Hidden mdUp>
             <div className={classes.getTitles}>
+              <Divider variant="fullWidth" orientation="horizontal" />
               <Typography variant="body1" gutterBottom>
                 <strong>Comprar títulos</strong>
               </Typography>
@@ -203,7 +285,7 @@ export default function ProjectViewer(props) {
                 justify="center"
                 alignItems="center"
               >
-                <Grid item xs={4} sm={4} md={4}>
+                <Grid item xs={6} sm={6}>
                   <Typography
                     variant="caption"
                     style={{ color: "rgba(0, 0, 0, 0.4)" }}
@@ -228,7 +310,7 @@ export default function ProjectViewer(props) {
                     </IconButton>
                   </Grid>
                 </Grid>
-                <Grid item xs={4} sm={4} md={4}>
+                <Grid item xs={6} sm={6}>
                   <Typography
                     variant="subtitle2"
                     style={{ color: "rgba(0, 0, 0, 0.3)" }}
@@ -246,7 +328,7 @@ export default function ProjectViewer(props) {
                   </Typography>
                   <Divider orientation="vertical" flexItem />
                 </Grid>
-                <Grid item xs={4} sm={4} md={4}>
+                <Grid item xs={12} sm={12}>
                   <div className={classes.wrapper}>
                     <Button
                       size="large"
@@ -263,8 +345,7 @@ export default function ProjectViewer(props) {
                 </Grid>
               </Grid>
             </div>
-          </Grid>
-          <ProjectDetails project={project} />
+          </Hidden>
           <Checkout
             onClose={handlePaymentClose}
             open={open.checkout}

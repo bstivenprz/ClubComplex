@@ -81,8 +81,8 @@ export default function ContentCard(props) {
             <Grid container>
               <Grid
                 item
-                xs={3}
-                sm={3}
+                xs={12}
+                sm={12}
                 md={3}
                 style={{ borderRight: "1px solid rgba(0, 0, 0, 0.12)" }}
               >
@@ -91,7 +91,7 @@ export default function ContentCard(props) {
                   selectProject={handleProjectsList}
                 />
               </Grid>
-              <Grid item xs={9} sm={9} md={9}>
+              <Grid item xs={12} sm={12} md={9}>
                 <ProjectViewer project={projectSelected} />
               </Grid>
             </Grid>

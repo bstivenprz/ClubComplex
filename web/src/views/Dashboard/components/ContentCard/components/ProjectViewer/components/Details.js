@@ -70,7 +70,7 @@ export default function ProjectDetails(props) {
   const classes = useStyles();
   const { project } = props;
   return (
-    <Grid item xs={4} className={classes.contentDetails}>
+    <Grid item xs={12} sm={12} md={4} className={classes.contentDetails}>
       <Typography variant="body1">
         <strong>Especificaciones técnicas</strong>
       </Typography>
