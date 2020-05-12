@@ -188,9 +188,17 @@ export default function ProjectViewer(props) {
             </Typography>
             <div className="ExampleSliders">
               <Slider loop={true} showNav={true}>
-                <img src={ProjectImage} style={{ width: "583.98px" }} />
-                <img src={ProjectImage} style={{ width: "583.98px" }} />
+                <img className="projectImage" src={ProjectImage}/>
+                <img className="projectImage" src={ProjectImage}/>
               </Slider>
+              {/* <Hidden mdDown>
+              </Hidden> */}
+              {/* <Hidden mdUp>
+                <Slider loop={true} showNav={true}>
+                  <img src={ProjectImage} style={{ width: "583.98px" }} />
+                  <img src={ProjectImage} style={{ width: "583.98px" }} />
+                </Slider>
+              </Hidden> */}
             </div>
             <Typography variant="body1">
               <strong>Descripcion</strong>
