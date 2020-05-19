@@ -3,6 +3,7 @@ import React from "react";
 /** Material UI */
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
+import Hidden from '@material-ui/core/Hidden';
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -44,8 +45,17 @@ export default function Checkout(props) {
               primary={`${titleName} x ${quantity}`}
               secondary={titleId}
             />
-            <ListItemSecondaryAction>{titleValue}</ListItemSecondaryAction>
+            <Hidden smDown>
+              <ListItemSecondaryAction>{titleValue}</ListItemSecondaryAction>
+            </Hidden>
           </ListItem>
+          <Hidden smUp>
+            <ListItem>
+              <ListItemText>
+                {titleValue}
+              </ListItemText>
+            </ListItem>
+          </Hidden>
           <Divider />
           <ListItem>
             <ListItemText>

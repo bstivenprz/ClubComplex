@@ -4,6 +4,7 @@ import React from "react";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import Divider from "@material-ui/core/Divider";
+import Hidden from '@material-ui/core/Hidden';
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -52,10 +53,19 @@ export default function ConfirmPayment(props) {
             <ListItemText>
               <strong>Valor a transferir</strong>
             </ListItemText>
-            <ListItemSecondaryAction>
-              <strong>{totalValue}</strong>
-            </ListItemSecondaryAction>
+            <Hidden smDown>
+              <ListItemSecondaryAction>
+                <strong>{totalValue}</strong>
+              </ListItemSecondaryAction>
+            </Hidden>
           </ListItem>
+          <Hidden smUp>
+            <ListItem>
+              <ListItemText>
+                <strong>{totalValue}</strong>
+              </ListItemText>
+            </ListItem>
+          </Hidden>
         </List>
       </DialogContent>
       <DialogActions>
