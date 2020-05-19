@@ -46,6 +46,14 @@ const allowedOrigins = [
 //   credentials: true
 // }))
 
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
+  res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+  res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
+  next();
+});
+
 /** Creating and running API Server */
 const server = app.listen(process.env.SERVER_PORT, process.env.HOST, function () {
   let host = server.address().address
