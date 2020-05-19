@@ -11,7 +11,8 @@ module.exports = [{
     hot: true,
     host: process.env.HOST || 'localhost',
     port: process.env.WEB_PORT || 8080,
-    historyApiFallback: true
+    historyApiFallback: true,
+    disableHostCheck: true
   },
   output: {
     path: path.resolve(__dirname, 'production'),

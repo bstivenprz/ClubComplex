@@ -31,7 +31,8 @@ glob(routesPath, function (error, files) {
 
 /** Cors Policy */
 const allowedOrigins = [
-  process.env.CORS_ORIGIN_CLIENT_HOST
+  process.env.CORS_ORIGIN_CLIENT_HOST,
+  process.env.CORS_ORIGIN_CLIENT_PDN
 ]
 
 app.use(cors({
