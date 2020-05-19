@@ -12,8 +12,8 @@ require('dotenv').config({ path: path.join(__dirname, '../config/.env') })
 /** Database Connection */
 require('./database')
 
-/** Helmet Security */
-app.use(helmet())
+// /** Helmet Security */
+// app.use(helmet())
 
 /** Parser of JSON format with encoded */
 app.use(bodyParser.json())
